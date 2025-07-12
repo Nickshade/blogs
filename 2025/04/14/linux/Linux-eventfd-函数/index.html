@@ -6,15 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Record Daily Learning">
-<meta property="og:type" content="article">
-<meta property="og:title" content="liunx 命令">
-<meta property="og:url" content="https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Linux eventfd()函数">
+<meta property="og:url" content="https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/">
 <meta property="og:site_name" content="YAOHAN-LI">
-<meta property="og:description" content="Record Daily Learning">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-05-08T13:02:53.000Z">
-<meta property="article:modified_time" content="2025-05-08T13:02:53.159Z">
+<meta property="article:published_time" content="2025-04-14T12:33:19.000Z">
+<meta property="article:modified_time" content="2025-07-12T14:25:52.976Z">
 <meta property="article:author" content="YAOHAN-LI">
 <meta property="article:tag" content="log">
 <meta name="twitter:card" content="summary">
@@ -37,7 +35,7 @@
         
     
     <!-- title -->
-    <title>liunx 命令</title>
+    <title>Linux eventfd()函数</title><meta name="robots" content="noindex">
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -71,10 +69,6 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2025/05/08/%E5%BC%80%E6%BA%90%E5%BA%93/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2025/05/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -87,16 +81,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&text=liunx 命令"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&is_video=false&description=liunx 命令"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=liunx 命令&body=Check out this article: https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&name=liunx 命令&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&text=Linux eventfd()函数"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&is_video=false&description=Linux eventfd()函数"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux eventfd()函数&body=Check out this article: https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&name=Linux eventfd()函数&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -113,7 +107,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        liunx 命令
+        Linux eventfd()函数
     </h1>
 
 
@@ -124,7 +118,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2025-05-08T13:02:53.000Z" itemprop="datePublished">2025-05-08</time>
+        <time datetime="2025-04-14T12:33:19.000Z" itemprop="datePublished">2025-04-14</time>
     </div>
 
 
@@ -135,7 +129,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    
+    <!-- flag of hidden posts -->
   </div>
 </article>
 
@@ -166,16 +160,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&text=liunx 命令"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&is_video=false&description=liunx 命令"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=liunx 命令&body=Check out this article: https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&title=liunx 命令"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://nickshade.github.io/2025/05/08/liunx-%E5%91%BD%E4%BB%A4/&name=liunx 命令&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&text=Linux eventfd()函数"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&is_video=false&description=Linux eventfd()函数"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux eventfd()函数&body=Check out this article: https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&title=Linux eventfd()函数"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://nickshade.github.io/2025/04/14/linux/Linux-eventfd-%E5%87%BD%E6%95%B0/&name=Linux eventfd()函数&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
